@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "make",
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "always" },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "make clean",
+            "group": "none",
+            "presentation": { "reveal": "always" }
+        },
+        { 
+            "label": "Run",
+            "type": "shell", 
+            "command": "./build/myprog", 
+            "group": "none", 
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "options": {
+                "env": { "LD_LIBRARY_PATH": "/usr/local/lib:${env:LD_LIBRARY_PATH}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,151 @@
+{
+    "worldData" : {
+        "tileMeterSize": 10,
+        "ironOreAmount" : 60,
+        "population" : 50
+    },
+    "terrain" : [
+        {
+            "name": "Grass",
+            "char": "M",
+            "travelSpeed": 1
+        },
+        {
+            "name" : "Swamp",
+            "char" : "G",
+            "travelSpeed" : 0.5
+        },
+        {
+            "name": "Rock",
+            "char": "B",
+            "travelSpeed": -1
+        },
+        {
+            "name": "Water",
+            "char": "V",
+            "travelSpeed": -1
+        },
+        {
+            "name": "Trees",
+            "char": "T",
+            "travelSpeed": 1
+        }
+    ],
+
+    "resourceActionCost" : [
+        {
+            "name" : "Fell tree",
+            "time" : 30,
+            "trees" : 0,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        },
+        {
+            "name" : "Make coal",
+            "time" : 30,
+            "trees" : 2,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        },
+        {
+            "name" : "Make iron bar",
+            "time" : 30,
+            "trees" : 0,
+            "coal" : 3,
+            "ironOre" : 2,
+            "ironBar" : 0,
+            "swords" : 0
+        },
+        {
+            "name" : "Make sword",
+            "time" : 60,
+            "trees" : 0,
+            "coal" : 2,
+            "ironOre" : 0,
+            "ironBar" : 1,
+            "swords" : 0
+        }
+    ],
+
+    "trainingActionCost" : [
+        {
+            "name" : "Train Scout",
+            "time" : 60,
+            "trees" : 0,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        },
+        {
+            "name" : "Train Builder",
+            "time" : 60,
+            "trees" : 0,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 1
+        },
+        {
+            "name" : "Train Soldier",
+            "time" : 60,
+            "trees" : 0,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 1
+        },
+        {
+            "name" : "Train Craftsman",
+            "time" : 120,
+            "trees" : 0,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        }
+    ],
+
+    "buildingActionCost" : [
+        {
+            "name" : "Build Coal mile",
+            "time" : 60,
+            "trees" : 10,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        },
+        {
+            "name" : "Build Armsmith's Forge",
+            "time" : 180,
+            "trees" : 10,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 3,
+            "swords" : 0
+        },
+        {
+            "name" : "Build Smelter",
+            "time" : 120,
+            "trees" : 10,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        },
+        {
+            "name" : "Build Training Camp",
+            "time" : 120,
+            "trees" : 10,
+            "coal" : 0,
+            "ironOre" : 0,
+            "ironBar" : 0,
+            "swords" : 0
+        }
+    ]
+}
