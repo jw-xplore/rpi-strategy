@@ -12,6 +12,9 @@ class World;
 
 class EntityManager
 {
+private:
+	Texture2D workerTexture;
+
 public:
 	World* world;
 	std::vector<Worker> workers;
@@ -23,6 +26,7 @@ public:
 	EntityManager();
 	~EntityManager();
 
+	void Init();
 	void Update(float dTime);
 
 	Worker* FindWorkerOfRole(EWorkerRole role);

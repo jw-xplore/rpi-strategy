@@ -70,6 +70,7 @@ FellTreeSubtask::FellTreeSubtask(TreesTile* tile, float t) :
 
 ESubtaskState FellTreeSubtask::Execute(Worker& worker, float dTime)
 {
+	//delay = 1;
 	if (timer >= delay)
 	{
 		//Vector2 pos = { treesTile->x * GlobalVars::TILE_SIZE, treesTile->y * GlobalVars::TILE_SIZE };
@@ -133,6 +134,7 @@ ESubtaskState DropItemSubtask::Execute(Worker& worker, float dTime)
 
 ESubtaskState TrainWorker::Execute(Worker& worker, float dTime)
 {
+	//delay = 1;
 	if (timer >= delay)
 	{
 		// Done
@@ -161,6 +163,7 @@ ESubtaskState TrainWorker::Execute(Worker& worker, float dTime)
 
 ESubtaskState CreateBuilding::Execute(Worker& worker, float dTime)
 {
+	//delay = 1;
 	if (!started)
 	{
 		building->StartBuilding();
@@ -181,6 +184,7 @@ ESubtaskState CreateBuilding::Execute(Worker& worker, float dTime)
 
 ESubtaskState CreateItem::Execute(Worker& worker, float dTime)
 {
+	//delay = 1;
 	if (!started)
 	{
 		building->reservedCapital += cost;

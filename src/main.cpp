@@ -12,11 +12,18 @@
 #include "SystemsHolder.h"
 #include "Commander.h"
 #include "Camera.h"
+#include <thread>
+#include <atomic>
 
 extern float TIME_SCALE = 1;
 bool pause = false;
 
 CustomCamera cam;
+World world("resources/WorldMap.txt");
+int frameCount = 0;
+const int fpsStatsSize = 300;
+float fpsStats[fpsStatsSize];
+float avgFps = 0;
 
 /*
 Debug
@@ -51,7 +58,7 @@ void AdjustTimeScale()
     DrawText(cTime, 50 + cam.camera.target.x, 10 + cam.camera.target.y, 16 / cam.camera.zoom, YELLOW);
 
     // Show FPS
-    std::string strFPS = "FPS: " + std::to_string(1 / GetFrameTime());
+    std::string strFPS = "FPS: " + std::to_string(1 / GetFrameTime()) + "(avg: " + std::to_string(avgFps) + ")";
     char const* cFPS = strFPS.c_str();
     DrawText(cFPS, 50 + cam.camera.target.x, 30 + cam.camera.target.y, 16 / cam.camera.zoom, YELLOW);
 
@@ -66,9 +73,11 @@ void RunGame()
 {
     // Init
     //World world = World("resources/testMap.txt");
-    World world = World("resources/WorldMap.txt");
+    //world = World("resources/WorldMap.txt");
+    world.Init();
     PathFinding pathfinding = PathFinding(world);
     EntityManager entityManager = EntityManager();
+    entityManager.Init();
     entityManager.world = &world;
     SystemsHolder::GetInstance()->Init(&world, &entityManager, &pathfinding);
     Commander commander = Commander();
@@ -76,20 +85,6 @@ void RunGame()
 
     //std::vector<Node>* path = pathfinding.AStar({ 64, 64 }, { 640, 640 });
     //return;
-
-    std::map<Node*, NodeRecordAs> searchResult;
-    std::priority_queue<NodeRecordAs, std::vector<NodeRecordAs>, NodeRecordAsCompare> open;
-    //std::vector<Node>* path = pathfinding.AStarDivided({ 1300, 64 }, { 1000, 640 }, searchResult, open);
-    //std::vector<Node>* path = {};
-    int frameCount = 0;
-
-    /*
-    Camera2D camera = { 0 };
-    camera.target = { 0,0};
-    camera.offset = { 0,0 };
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
-    */
 
     // Gameloop
     while (!WindowShouldClose())
@@ -124,9 +119,36 @@ void RunGame()
 
         // Debug drawing
         commander.DebugDraw();
+        //pathfinding.DrawGraph();
 
         EndDrawing();
         //return;
+        
+        // Calculate avg
+        if (frameCount < fpsStatsSize)
+        {
+            fpsStats[frameCount] = 1 / GetFrameTime();
+        }
+        else
+        {
+            for (int i = 1; i < fpsStatsSize; i++)
+            {
+                fpsStats[i - 1] = fpsStats[i];
+            }
+
+            fpsStats[fpsStatsSize - 1] = 1 / GetFrameTime();
+        }
+
+        int fpsTotal = 0;
+        for (int i = 0; i < fpsStatsSize; i++)
+        {
+            fpsTotal += fpsStats[i];
+        }
+
+        if (frameCount < fpsStatsSize)
+            frameCount++;
+
+        avgFps = fpsTotal / frameCount;
     }
 
     // Cleanup
@@ -138,10 +160,13 @@ int main()
 {
     // Window setup
     InitWindow(GlobalVars::SCREEN_WIDTH, GlobalVars::SCREEN_HEIGHT, "My first RAYLIB program!");
-    SetTargetFPS(60);
+    SetTargetFPS(120);
 
     RunGame();
 
     // End
     CloseWindow();
+
+    //_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+    //_CrtDumpMemoryLeaks();
 }

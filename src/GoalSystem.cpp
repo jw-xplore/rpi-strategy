@@ -218,9 +218,6 @@ void GoalStep::AssignTask()
 
 	if (worker)
 	{
-		if (isDelivery && output.type == Capital::ECapitalType::Coal)
-			int a = 4;
-
 		Task* task = taskFunc(worker);
 		if (!task)
 			return;

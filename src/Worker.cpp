@@ -15,6 +15,7 @@
 Worker::Worker(Vector2 starPos)
 {
 	speed = (1.0 / 10.0) * GlobalVars::TILE_SIZE;
+	//speed = 20;
 	position = starPos;
 	target = position;
 	pathNodeDistance = pathNodeDistance * pathNodeDistance;

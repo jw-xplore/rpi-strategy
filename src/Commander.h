@@ -60,7 +60,7 @@ public:
 	//std::map<Worker*, Task*> workerTaskMap;
 	std::vector<Task*> activeTasks;
 	//std::map<Worker*, CommanderGoals::CommanderGoal*> workerGoalMap;
-	int dedicatedScouts = 40;
+	int dedicatedScouts = 5;
 	int scoutsPos;
 	std::vector<Worker*> scouts;
 

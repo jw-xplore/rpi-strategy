@@ -73,6 +73,9 @@ struct TreesTile
 //-----------------------------------------------
 class World
 {
+private:
+    Texture2D treeTileTextures[5];
+
 public:
     int worldSize, width, height;
 
@@ -93,6 +96,7 @@ public:
     World(const char* path);
     ~World();
 
+    void Init();
     bool LoadMap(const char* path);
     void Update(float dTime);
     void Draw();
@@ -114,9 +118,6 @@ public:
     {
         float x = tile.x * GlobalVars::TILE_SIZE + GlobalVars::TILE_HALF_SIZE;
         float y = tile.y * GlobalVars::TILE_SIZE + GlobalVars::TILE_HALF_SIZE;
-
-        if (y == 37)
-            int a = 5;
 
         return { x,y };
     }
