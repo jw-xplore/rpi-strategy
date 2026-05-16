@@ -30,7 +30,7 @@ EntityManager::EntityManager()
 
 	// Setup workers
 	int population = db->startingPopulation;
-	//population = 8;
+	//population = 20;
 
 	//workers = new std::vector<Worker>();
 	workers.reserve(population);
@@ -94,7 +94,7 @@ void EntityManager::Update(float dTime)
 		if (commander->activeTasks[worker.id])
 			col = YELLOW;
 
-		DrawText(std::to_string(worker.id).c_str(), worker.position.x, worker.position.y, 4, col);
+		//DrawText(std::to_string(worker.id).c_str(), worker.position.x, worker.position.y, 4, col);
 	}
 
 	// Render pickups
@@ -109,6 +109,7 @@ void EntityManager::Update(float dTime)
 		DrawRectangle(building->position.x, building->position.y, GlobalVars::TILE_HALF_SIZE, GlobalVars::TILE_HALF_SIZE, building->color);
 	
 		// Debug
+		/*
 		int* available = building->GetAvailableCapital().amounts;
 		int* reserved = building->reservedCapital.amounts;
 
@@ -118,6 +119,7 @@ void EntityManager::Update(float dTime)
 		buildStr += ", ib: " + std::to_string(available[Capital::ECapitalType::IronBar]) + " (" + std::to_string(reserved[Capital::ECapitalType::IronBar]) + ")";
 		
 		DrawText(buildStr.c_str(), building->position.x, building->position.y, 8, BLACK);
+		*/
 	}
 }
 

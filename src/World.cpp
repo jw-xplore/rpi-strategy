@@ -163,7 +163,7 @@ bool World::LoadMap(const char* path)
             // Trees
             if (map[y][x] == db->terrains[ETerrainType::Trees].charIdentifier)
             {
-                mapTerrain[x][y] = ETerrainType::Grass;
+                mapTerrain[x][y] = ETerrainType::Trees;
                 treeTiles.push_back(TreesTile(x, y, 5, GlobalVars::TILE_HALF_SIZE));
             }
         }
@@ -179,7 +179,7 @@ bool World::LoadMap(const char* path)
     {
         for (int y = startTileY; y < endTileY; y++)
         {
-            discovered[x][y] = EDiscovetyState::Discovered;
+            //discovered[x][y] = EDiscovetyState::Discovered;
         }
     }
 
@@ -209,7 +209,7 @@ void World::Draw()
             // Show fog 
             if (discovered[x][y] != EDiscovetyState::Discovered)
             {
-                DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GRAY);
+                //DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GRAY);
                 continue;
             }
 
@@ -218,15 +218,12 @@ void World::Draw()
 
             switch (mapTerrain[x][y])
             {
-            case ETerrainType::Grass: col = cGrass; continue;
-            case ETerrainType::Swamp: col = cSwamp; break;
-            case ETerrainType::Water: col = cWater; break;
-            case ETerrainType::Rock: col = cRock; break;
+            //case ETerrainType::Grass: col = cGrass; continue;
+            //case ETerrainType::Trees: col = cGrass; continue;
+            case ETerrainType::Swamp: DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, cSwamp); break;
+            case ETerrainType::Water: DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, cWater); break;
+            case ETerrainType::Rock: DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, cRock); break;
             }
-
-            DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, col);
-
-            //DrawText(std::to_string(y).c_str(), x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, 6, BLACK);
         }
     }
 
@@ -239,9 +236,14 @@ void World::Draw()
         // Show fog 
         if (discovered[treeTiles[i].x][treeTiles[i].y] != EDiscovetyState::Discovered)
         {
-            DrawRectangle(x, y, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GRAY);
+            //DrawRectangle(x, y, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GRAY);
             continue;
         }
+
+        /*
+        if (treeTiles[i].amount - treeTiles[i].reservations <= 0)
+            DrawCircle(x, y, 6, PINK);
+        */
 
         DrawTexture(treeTileTextures[treeTiles[i].amount - 1], x, y, BROWN);
     }
@@ -252,9 +254,9 @@ void DrawTrees()
 
 }
 
-EDiscovetyState World::TileDiscoveryState(int x, int y)
+void World::Discover(int x, int y, EDiscovetyState state)
 {
-    return discovered[x][y];
+    discovered[x][y] = state;
 }
 
 /// <summary>

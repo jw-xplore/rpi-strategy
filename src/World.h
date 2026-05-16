@@ -2,6 +2,7 @@
 #include <vector>
 #include "Constants.h"
 #include <iostream>
+#include <map>
 
 class ComponentsManager;
 class EntityManager;
@@ -75,6 +76,8 @@ class World
 {
 private:
     Texture2D treeTileTextures[5];
+    EDiscovetyState** discovered; // Blocks discovered by NCPs, Undiscovered will be covered in fog
+    std::vector<TreesTile> treeTiles;
 
 public:
     int worldSize, width, height;
@@ -82,8 +85,6 @@ public:
     // Map data
     int undiscoveredCount;
     ETerrainType** mapTerrain;
-    std::vector<TreesTile> treeTiles;
-    EDiscovetyState** discovered; // Blocks discovered by NCPs, Undiscovered will be covered in fog
 
     // Colors
     const Color cGrass = { 70, 100, 52, 255 };
@@ -101,7 +102,9 @@ public:
     void Update(float dTime);
     void Draw();
     //bool IsDiscovered(int x, int y);
-    EDiscovetyState TileDiscoveryState(int x, int y);
+
+    void Discover(int x, int y, EDiscovetyState state);
+    EDiscovetyState inline TileDiscoveryState(int x, int y) { return discovered[x][y]; }
 
     TreesTile* ClosestTreeTile(Vector2Int currentTile);
     void RemoveTreeTile(TreesTile* tile);

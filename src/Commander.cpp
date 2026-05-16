@@ -341,6 +341,9 @@ void Commander::UpdatePlan()
 
 	for (Worker& worker : entityManager->workers)
 	{
+		if (activeTasks[i])
+			continue;
+
 		for (Goal*& goal : goals)
 		{
 			GoalStep* step = goal->NextAvailableStep();

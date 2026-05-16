@@ -56,7 +56,7 @@ ESubtaskState MoveToSubtask::Execute(Worker& worker, float dTime)
 	if (worker.PathTargetReached())
 		return ESubtaskState::Finnished;
 
-	DrawCircle(worker.target.x, worker.target.y, 10, PINK);
+	//DrawCircle(worker.target.x, worker.target.y, 10, PINK);
 	
 	return ESubtaskState::Running;
 }
