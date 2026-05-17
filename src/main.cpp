@@ -21,7 +21,7 @@ bool pause = false;
 CustomCamera cam;
 World world("resources/WorldMap.txt");
 int frameCount = 0;
-const int fpsStatsSize = 300;
+const int fpsStatsSize = 120;
 float fpsStats[fpsStatsSize];
 float avgFps = 0;
 
