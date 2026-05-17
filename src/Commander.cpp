@@ -297,11 +297,15 @@ void Commander::Update(float dTime)
 	// Assigne new tasks
 	replanTimer += dTime;
 
+	/*
 	if (replanTimer >= replanDelay)
 	{
 		UpdatePlan();
 		replanTimer = 0;
 	}
+	*/
+
+	UpdatePlan();
 
 	// Update tasks
 	int sz = activeTasks.size();
@@ -337,8 +341,9 @@ void Commander::Update(float dTime)
 
 void Commander::UpdatePlan()
 {
-	int i = 0;
+	//int i = 0;
 
+	/*
 	for (Worker& worker : entityManager->workers)
 	{
 		if (activeTasks[i])
@@ -352,6 +357,10 @@ void Commander::UpdatePlan()
 				step->AssignTask();
 				break;
 			}
+			else
+			{
+				goal->NextAvailableStep();
+			}
 		}
 
 		i++;
@@ -363,13 +372,64 @@ void Commander::UpdatePlan()
 	int end = dedicatedScouts + scoutsPos;
 	for (int i = scoutsPos; i < end; i++)
 	{
-		Task* active = 	activeTasks[i];
+		Task* active = activeTasks[i];
 		if (activeTasks[i] != nullptr)
 			continue;
 
 		int si = i - scoutsPos;
 		AssignTask(scouts[si], WorkerTasks::ScoutTask(scouts[si]));
 	}
+	*/
+
+	int size = entityManager->workers.size();
+	int limit = 10;
+	int checks = 0;
+
+	// Move to next if work is taken
+	while (activeTasks[workerToPlan])
+	{
+		workerToPlan++;
+		if (workerToPlan >= size)
+			workerToPlan = 0;
+
+		checks++;
+		if (checks > limit)
+			return;
+	}
+
+	// Update selected worker plan
+	if (workerToPlan < scoutsPos)
+	{
+		// Workers
+		for (Goal*& goal : goals)
+		{
+			GoalStep* step = goal->NextAvailableStep();
+			if (step)
+			{
+				step->AssignTask(&entityManager->workers[workerToPlan]);
+				break;
+			}
+			else
+			{
+				// Debug
+				goal->NextAvailableStep();
+			}
+		}
+	}
+	else
+	{
+		// Scouts
+		if (!pathfinding->nextUndiscovered.empty())
+		{
+			int si = workerToPlan - scoutsPos;
+			AssignTask(scouts[si], WorkerTasks::ScoutTask(scouts[si]));
+		}
+	}
+
+	// Move to next
+	workerToPlan++;
+	if (workerToPlan >= size)
+		workerToPlan = 0;
 }
 
 int displayTask = 0;

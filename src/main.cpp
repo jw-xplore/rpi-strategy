@@ -160,7 +160,7 @@ int main()
 {
     // Window setup
     InitWindow(GlobalVars::SCREEN_WIDTH, GlobalVars::SCREEN_HEIGHT, "My first RAYLIB program!");
-    //SetTargetFPS(120);
+    SetTargetFPS(120);
 
     RunGame();
 

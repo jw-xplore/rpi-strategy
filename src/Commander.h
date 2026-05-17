@@ -63,6 +63,7 @@ public:
 	int dedicatedScouts = 5;
 	int scoutsPos;
 	std::vector<Worker*> scouts;
+	int workerToPlan = 0;
 
 	// Plan
 	std::vector<GoalStep*> availableSteps;

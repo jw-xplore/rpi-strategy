@@ -209,7 +209,7 @@ void World::Draw()
             // Show fog 
             if (discovered[x][y] != EDiscovetyState::Discovered)
             {
-                //DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GRAY);
+                DrawRectangle(x * GlobalVars::TILE_SIZE, y * GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GlobalVars::TILE_SIZE, GRAY);
                 continue;
             }
 
@@ -246,6 +246,9 @@ void World::Draw()
         */
 
         DrawTexture(treeTileTextures[treeTiles[i].amount - 1], x, y, BROWN);
+
+        //std::string pos = std::to_string(treeTiles[i].amount) + "\n(" + std::to_string(treeTiles[i].reservations) + ")";
+        //DrawText(pos.c_str(), x, y, 1, WHITE);
     }
 }
 

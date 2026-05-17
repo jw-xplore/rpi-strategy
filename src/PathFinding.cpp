@@ -222,8 +222,8 @@ std::vector<Node>* PathFinding::AStarDivided(Vector2 start, Vector2 end, std::ma
 	// Find start and end
 	Node* startNode = nullptr;
 
-	int ex = ((int)end.x + GlobalVars::TILE_HALF_SIZE) / GlobalVars::TILE_SIZE;
-	int ey = ((int)end.y + GlobalVars::TILE_HALF_SIZE) / GlobalVars::TILE_SIZE;
+	int ex = (int)end.x / GlobalVars::TILE_SIZE;
+	int ey = (int)end.y / GlobalVars::TILE_SIZE;
 	Node* endNode = &nodes[ey][ex];
 
 	// TODO: Remove and tweak this for divided search
@@ -232,8 +232,8 @@ std::vector<Node>* PathFinding::AStarDivided(Vector2 start, Vector2 end, std::ma
 	if (searchResult.empty())
 	{
 		// Find start
-		int sx = ((int)start.x + GlobalVars::TILE_HALF_SIZE) / GlobalVars::TILE_SIZE;
-		int sy = ((int)start.y + GlobalVars::TILE_HALF_SIZE) / GlobalVars::TILE_SIZE;
+		int sx = (int)start.x / GlobalVars::TILE_SIZE;
+		int sy = (int)start.y / GlobalVars::TILE_SIZE;
 		startNode = &nodes[sy][sx];
 
 		// Initialize start node

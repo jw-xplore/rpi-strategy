@@ -211,12 +211,12 @@ bool GoalStep::IsDone()
 	return finishedTasks == totalTasks;
 }
 
-void GoalStep::AssignTask()
+void GoalStep::AssignTask(Worker* worker)
 {
 	Commander* commander = SystemsHolder::GetInstance()->commander;
-	Worker* worker = commander->FindFreeWorker(roleConstrain);
+	//Worker* worker = commander->FindFreeWorker(roleConstrain);
 
-	if (worker)
+	if (worker && worker->role == roleConstrain)
 	{
 		Task* task = taskFunc(worker);
 		if (!task)

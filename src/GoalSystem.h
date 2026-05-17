@@ -129,7 +129,7 @@ public:
 	bool IsInputSatisfied();
 	bool IsActive();
 	bool IsDone();
-	void AssignTask();
+	void AssignTask(Worker* worker);
 	void OnTaskFinished(Task* task);
 };
 
